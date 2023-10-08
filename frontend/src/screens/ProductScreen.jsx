@@ -34,11 +34,11 @@ const ProductScreen = () => {
           ? <Message variant='danger'>{error}</Message>  
           : (
           <Row>
-            <Col md={6}>
+            <Col md={3} sm={12}>
               <Image src={product.image} alt={product.name} fluid/>
             </Col>
 
-            <Col md={3}>
+            <Col md={6}>
               <ListGroup variant='flush'>
                 <ListGroup.Item variant='dark'>
                   <h4>{product.name}</h4>
