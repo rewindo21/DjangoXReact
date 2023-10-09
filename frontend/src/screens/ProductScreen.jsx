@@ -40,7 +40,7 @@ const ProductScreen = () => {
 
             <Col md={6}>
               <ListGroup variant='flush'>
-                <ListGroup.Item variant='dark'>
+                <ListGroup.Item>
                   <h4>{product.name}</h4>
                 </ListGroup.Item>
 
