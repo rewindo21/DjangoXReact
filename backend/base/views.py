@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .products import products
 from .models import Product
 from .serializers import ProductSerializer
 
