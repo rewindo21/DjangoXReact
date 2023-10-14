@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Product
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
 from rest_framework.decorators import api_view  # it specifies allowed methods
 from rest_framework.response import Response    # it gives a dicionary and converts it to json and sends to client
@@ -15,7 +15,9 @@ def getRoutes(request):
     routes = [
         '/products',
         '/products/<id>/',
+
         '/users/login/',
+        '/users/profile/',
     ]
     return Response(routes)
 
@@ -32,15 +34,23 @@ def getProduct(request, pk):
     return Response(serializer.data)
 
 
-# overwrite TokenObtainPairSerializer to return username and email with referesh and access
+# overwrite TokenObtainPairSerializer to return other datas with referesh and access token
 class myTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
-        data['username'] = self.user.username
-        data['email'] = self.user.email
+        serializer = UserSerializerWithToken(self.user).data
+        for k, v in serializer.items():
+            data[k] = v
 
         return data
 
 class myTokenObtainPairView(TokenObtainPairView):
     serializer_class = myTokenObtainPairSerializer
+
+
+@api_view(['GET'])
+def getUserProfile(request):
+    user = request.user
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
