@@ -16,11 +16,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email']
 
 
-class UserSerializerWithToken(UserSerializer):
+class UserSerializerWithToken(UserSerializer):  # for registration (to login right away)
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'token']
+        fields = ['id', 'username', 'email', 'token']   # token and access are the same but encoded differently
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
