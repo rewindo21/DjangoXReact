@@ -13,14 +13,14 @@ class ProductSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'first_name']
 
 
 class UserSerializerWithToken(UserSerializer):  # for registration (to login right away)
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'token']   # token and access are the same but encoded differently
+        fields = ['id', 'username', 'email', 'first_name', 'token']   # token and access are the same but encoded differently
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
