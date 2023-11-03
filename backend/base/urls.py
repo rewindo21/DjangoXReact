@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('users/', user_views.getUsers, name='users'),
     path('users/profile/', user_views.getUserProfile, name='user-profile'),
+    path('users/profile/update/', user_views.updateUserProfile, name='user-profile-update'),
 
     # path('users/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),      # it just return referesh and access, so we have to overwrite it 
     path('users/login/', user_views.myTokenObtainPairView.as_view(), name='token_obtain_pair'),
