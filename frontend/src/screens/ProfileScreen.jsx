@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
@@ -36,7 +36,7 @@ const ProfileScreen = () => {
         dispatch(getUserDetails("profile"));
       } else {
         setfName(user.first_name);
-        // setlName(user.last_name);
+        setlName(user.last_name);
         setEmail(user.email);
       }
     }
@@ -51,11 +51,11 @@ const ProfileScreen = () => {
       dispatch(updateUserProfile({
         'id': user._id,
         'first_name': fname,
-        // 'last_name': lname,
+        'last_name': lname,
         'email': email,
         'password': password
       }))
-      setMessage(' ')
+      setMessage('')
     }
   };
 
@@ -72,22 +72,22 @@ const ProfileScreen = () => {
             <Form.Control
               required
               type="name"
-              placeholder="Enter name"
+              placeholder="Enter first name"
               value={fname}
               onChange={(e) => setfName(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          {/* <Form.Group controlId="lname">
+          <Form.Group controlId="lname">
             <Form.Label>lName</Form.Label>
             <Form.Control
               required
               type="name"
-              placeholder="امیر اینو درست کن"
+              placeholder="Enter last name"
               value={lname}
               onChange={(e) => setlName(e.target.value)}
             ></Form.Control>
-          </Form.Group> */}
+          </Form.Group>
 
           <Form.Group controlId="email">
             <Form.Label>Email Address</Form.Label>
