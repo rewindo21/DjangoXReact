@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
+import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartActions";
 
 const ShippingScreen = () => {
@@ -26,6 +27,7 @@ const ShippingScreen = () => {
 
   return (
     <FormContainer>
+      <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
@@ -40,7 +42,7 @@ const ShippingScreen = () => {
         </Form.Group>
 
         <Form.Group controlId="city">
-          <Form.Label>Address</Form.Label>
+          <Form.Label>City</Form.Label>
           <Form.Control
             required
             type="text"
